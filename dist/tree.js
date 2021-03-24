@@ -362,7 +362,6 @@ Tree.prototype.setValue = function (value) {
 
 Tree.prototype.getValues = function () {
   var values = [];
-  console.log(this.nodesById);
 
   for (var id in this.nodesById) {
     if (this.nodesById.hasOwnProperty(id)) {

@@ -356,17 +356,17 @@ Tree.prototype.setValue = function (value) {
   var prevStatus = node.status;
   var status = prevStatus === 1 || prevStatus === 2 ? 0 : 2;
   node.status = status;
-  this.markWillUpdateNode(node);
-  this.walkUp(node, 'status');
-  this.walkDown(node, 'status');
+  this.markWillUpdateNode(node); // this.walkUp(node, 'status');
+  // this.walkDown(node, 'status');
 };
 
 Tree.prototype.getValues = function () {
   var values = [];
+  console.log(this.nodesById);
 
-  for (var id in this.leafNodesById) {
-    if (this.leafNodesById.hasOwnProperty(id)) {
-      if (this.leafNodesById[id].status === 1 || this.leafNodesById[id].status === 2) {
+  for (var id in this.nodesById) {
+    if (this.nodesById.hasOwnProperty(id)) {
+      if (this.nodesById[id].status === 1 || this.nodesById[id].status === 2) {
         values.push(id);
       }
     }

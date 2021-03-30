@@ -224,10 +224,10 @@ Tree.prototype.setValue = function(value) {
   const node = this.nodesById[value];
   if (!node) return;
   const prevStatus = node.status;
-  const status = prevStatus === 1 || prevStatus === 2 ? 0 : 2;
+  const status = /*prevStatus === 1 ||*/ prevStatus === 2 ? 0 : 2;
   node.status = status;
   this.markWillUpdateNode(node);
-  // this.walkUp(node, 'status');
+  this.walkUp(node, 'status');
   // this.walkDown(node, 'status');
 };
 
@@ -236,7 +236,7 @@ Tree.prototype.getValues = function() {
   for (let id in this.nodesById) {
     if (this.nodesById.hasOwnProperty(id)) {
       if (
-        this.nodesById[id].status === 1 ||
+        // this.nodesById[id].status === 1 ||
         this.nodesById[id].status === 2
       ) {
         values.push(id);
@@ -380,12 +380,13 @@ Tree.prototype.walkUp = function(node, changeState) {
         return acc;
       }, 0);
       if (statusCount) {
-        pStatus = statusCount === parent.children.length * 2 ? 2 : 1;
+        pStatus = 1;
       } else {
         pStatus = 0;
       }
-      if (parent.status === pStatus) return;
+      if (parent.status === pStatus || parent.status ===2) return;
       parent.status = pStatus;
+
     } else {
       const pDisabled = parent.children.reduce(
         (acc, child) => acc && child.disabled,

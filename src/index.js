@@ -228,7 +228,9 @@ Tree.prototype.setValue = function(value) {
   node.status = status;
   this.markWillUpdateNode(node);
   this.walkUp(node, 'status');
-  // this.walkDown(node, 'status');
+  if (status === 0) {
+    this.walkDown(node, 'status');
+  }
 };
 
 Tree.prototype.getValues = function() {

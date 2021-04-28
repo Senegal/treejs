@@ -359,7 +359,11 @@ Tree.prototype.setValue = function (value) {
   prevStatus === 2 ? 0 : 2;
   node.status = status;
   this.markWillUpdateNode(node);
-  this.walkUp(node, 'status'); // this.walkDown(node, 'status');
+  this.walkUp(node, 'status');
+
+  if (status === 0) {
+    this.walkDown(node, 'status');
+  }
 };
 
 Tree.prototype.getValues = function () {
